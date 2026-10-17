@@ -417,6 +417,9 @@ types/          shared types (chat, server, settings, api, storage)
 
     ![Attachment menu: images, audio, text files, PDFs and a system message](public/images/attachements.png)
 
+- Math: LaTeX formulas and Unicode math symbols render with KaTeX, including
+  `$...$`, `$$...$$`, `\(...\)` and `\[...\]` delimiters
+
 - Sampling and penalty settings: an empty field is not sent (the endpoint
   applies its own defaults); parameter names are adapted to the endpoint `type`
   (`repetition_penalty` for vLLM, `repeat_penalty` and `dry_*` for llama.cpp)
