@@ -231,7 +231,12 @@ each compare pane keeps its own choice (otherwise the global setting applies).
 
 `thinking` is an on/off toggle. Its `on`/`off` fragments are sent when the
 Reasoning switch is on or off; a missing side sends nothing, leaving the model's
-own default:
+own default.
+
+OpenAI-compatible entries (`openai`, `vllm`) that do not declare `effort` get
+generic **Auto / Low / Medium / High** levels backed by `reasoning_effort`; the
+active level is adjustable from the control beside the composer. `Auto` sends
+nothing and leaves the request unchanged.
 
 ```json
 {

@@ -65,6 +65,10 @@
         "thinking": "思考",
         "thinkingDescription": "可以思考更复杂的任务",
         "effortDescription": "努力程度越高，回答越深入，但速度更慢",
+        "effortAuto": "自动",
+        "effortLow": "低",
+        "effortMedium": "中",
+        "effortHigh": "高",
         "default": "默认"
     },
     "chat": {
@@ -178,7 +182,8 @@
         "systemMessageDescription": "发送到本对话最前面，覆盖全局系统提示词设置。",
         "systemMessagePlaceholder": "你是一个乐于助人的助手…",
         "enterHint": "按 <kbd>Enter</kbd> 发送，<kbd>Shift + Enter</kbd> 换行",
-        "disabledNoModel": "没有可用模型（config.json）"
+        "disabledNoModel": "没有可用模型（config.json）",
+        "thinkingEffort": "思考强度"
     },
     "contextBar": {
         "context": "上下文：{used}/{total}（{percent}%）",

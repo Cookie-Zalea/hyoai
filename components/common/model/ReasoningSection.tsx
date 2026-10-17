@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useStore } from "@/hooks/useStore";
 import { useChatInstance } from "@/lib/chat/context";
-import { resolveEffortLevel } from "@/lib/effort";
+import { effortLabelKey, resolveEffortLevel } from "@/lib/effort";
 import { settingsStore } from "@/lib/stores/settings";
 import type { ModelConfig } from "@/types/server";
 
@@ -40,6 +40,12 @@ export function ReasoningSection({ entry }: { entry: ModelConfig | null }) {
     const showThinking = Boolean(entry?.supportsThinking);
     const effortLevels = entry?.effort?.levels ?? [];
     const effortLevel = resolveEffortLevel(entry?.effort, effort);
+    const effortLabel = effortLevel
+        ? (() => {
+              const key = effortLabelKey(effortLevel);
+              return key ? t(key) : effortLevel.label;
+          })()
+        : "";
 
     if (!showThinking && !effortLevel) return null;
 
@@ -72,7 +78,7 @@ export function ReasoningSection({ entry }: { entry: ModelConfig | null }) {
                 <DropdownMenuSubTrigger>
                     <span className="flex-1">{t("reasoning")}</span>
                     {effortLevel && (
-                        <span className="text-xs text-muted-foreground">{effortLevel.label}</span>
+                        <span className="text-xs text-muted-foreground">{effortLabel}</span>
                     )}
                 </DropdownMenuSubTrigger>
                 <DropdownMenuSubContent

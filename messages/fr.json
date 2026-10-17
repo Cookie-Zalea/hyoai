@@ -65,6 +65,10 @@
         "thinking": "Réflexion",
         "thinkingDescription": "Peut réfléchir aux tâches plus complexes",
         "effortDescription": "Un effort plus élevé donne des réponses plus complètes mais plus lentes",
+        "effortAuto": "Auto",
+        "effortLow": "Faible",
+        "effortMedium": "Moyen",
+        "effortHigh": "Élevé",
         "default": "Défaut"
     },
     "chat": {
@@ -178,7 +182,8 @@
         "systemMessageDescription": "Envoyé en tête de cette conversation, remplace le prompt système global des paramètres.",
         "systemMessagePlaceholder": "Tu es un assistant utile...",
         "enterHint": "<kbd>Entrée</kbd> pour envoyer, <kbd>Maj + Entrée</kbd> pour une nouvelle ligne",
-        "disabledNoModel": "Aucun modèle disponible (config.json)"
+        "disabledNoModel": "Aucun modèle disponible (config.json)",
+        "thinkingEffort": "Effort de réflexion"
     },
     "contextBar": {
         "context": "Contexte : {used}/{total} ({percent} %)",
