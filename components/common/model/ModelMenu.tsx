@@ -79,7 +79,8 @@ export function ModelMenu({
                 isMobile={isMobile}
                 align={align}
                 title={t("selectModel")}
-                contentClassName="w-72"
+                contentClassName="w-80 min-h-[18rem] max-h-[min(32rem,var(--radix-dropdown-menu-content-available-height))]"
+                mobileContentClassName="min-h-[45dvh]"
                 preventCloseAutoFocus={preventCloseAutoFocus}
                 onDismiss={focusComposer}
                 trigger={children}
