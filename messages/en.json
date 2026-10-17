@@ -118,6 +118,7 @@
         "tokens": "{count} tokens",
         "speed": "{value} tok/s",
         "scrollToBottom": "Scroll to bottom",
+        "generatedImage": "Generated image",
         "aborted": "Generation stopped",
         "chapterExtract": "Chapter {index}/{total} · Excerpt",
         "chapterAnalysis": "Chapter {index}/{total} · Analysis",
@@ -131,6 +132,7 @@
     },
     "composer": {
         "placeholder": "Send a message...",
+        "imagePrompt": "Describe the image to generate...",
         "send": "Send",
         "stop": "Stop generation",
         "attachMenu": "Add files or a system message",

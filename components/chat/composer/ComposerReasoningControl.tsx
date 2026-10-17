@@ -10,6 +10,7 @@ import { useResolvedModel } from "@/hooks/useResolvedModel";
 import { useStore } from "@/hooks/useStore";
 import { useChatInstance } from "@/lib/chat/context";
 import { effortLabelKey, resolveEffortLevel } from "@/lib/effort";
+import { isImageGenerationModel } from "@/lib/imageModels";
 import { settingsStore } from "@/lib/stores/settings";
 import type { EffortLevel } from "@/types/server";
 
@@ -45,7 +46,7 @@ export function ComposerReasoningControl() {
     const t = useTranslations("composer");
     const th = useTranslations("header");
     const instance = useChatInstance();
-    const { entry } = useResolvedModel();
+    const { entry, upstream } = useResolvedModel();
     const modelSel = useStore(instance.model, (state) => state);
     const globalThinking = useStore(settingsStore, (state) => state.settings.thinking);
     const globalEffort = useStore(settingsStore, (state) => state.settings.effort);
@@ -53,6 +54,8 @@ export function ComposerReasoningControl() {
         ? globalThinking
         : (modelSel.thinking ?? globalThinking);
     const effort = instance.controlsGlobalModel ? globalEffort : (modelSel.effort ?? globalEffort);
+
+    if (isImageGenerationModel(upstream)) return null;
 
     const showThinking = Boolean(entry?.supportsThinking);
     const effortLevels = entry?.effort?.levels ?? [];

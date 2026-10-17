@@ -86,7 +86,7 @@ export function ModelMenu({
                 trigger={children}
             >
                 <ModelEntryList entries={entries} lists={lists} />
-                <ReasoningSection entry={activeEntry} />
+                <ReasoningSection entry={activeEntry} upstream={activeUpstream} />
             </ResponsiveMenu>
         </ModelMenuProvider>
     );

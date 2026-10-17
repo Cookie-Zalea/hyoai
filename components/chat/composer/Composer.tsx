@@ -13,6 +13,7 @@ import { useResolvedModel } from "@/hooks/useResolvedModel";
 import { useStore } from "@/hooks/useStore";
 import { useChatInstance } from "@/lib/chat/context";
 import { resolveModalityGate } from "@/lib/chat/modalities";
+import { isImageGenerationModel } from "@/lib/imageModels";
 import { settingsStore } from "@/lib/stores/settings";
 import { setSystemPromptOpen, uiStore } from "@/lib/stores/ui";
 import { cn } from "@/lib/utils";
@@ -42,6 +43,7 @@ export function Composer({ home = false }: { home?: boolean }) {
     const { entry, upstream, props, resolveFailed } = useResolvedModel();
 
     const { visionBlocked, audioBlocked } = resolveModalityGate(entry, props);
+    const imageMode = isImageGenerationModel(upstream);
 
     const single = chat.controlsGlobalModel;
     const embed = useStore(uiStore, (state) => state.embed);
@@ -77,21 +79,28 @@ export function Composer({ home = false }: { home?: boolean }) {
                 disabledReason={disabledReason}
                 visionBlocked={Boolean(visionBlocked)}
                 audioBlocked={Boolean(audioBlocked)}
+                imageMode={imageMode}
+                placeholder={imageMode ? t("imagePrompt") : undefined}
                 onSystemMessage={
                     chat.controlsGlobalModel ? () => setSystemPromptOpen(true) : undefined
                 }
                 banner={chat.controlsGlobalModel ? <SystemMessageChip /> : undefined}
                 rightControls={
-                    <>
-                        <ComposerReasoningControl />
-                        <ChunkingControl />
-                        {!modelLocked &&
-                            (single ? (
-                                <ComposerModelSelector />
-                            ) : (
-                                <PaneModelSelector align="end" />
-                            ))}
-                    </>
+                    imageMode ? (
+                        !modelLocked &&
+                        (single ? <ComposerModelSelector /> : <PaneModelSelector align="end" />)
+                    ) : (
+                        <>
+                            <ComposerReasoningControl />
+                            <ChunkingControl />
+                            {!modelLocked &&
+                                (single ? (
+                                    <ComposerModelSelector />
+                                ) : (
+                                    <PaneModelSelector align="end" />
+                                ))}
+                        </>
+                    )
                 }
             />
         </div>

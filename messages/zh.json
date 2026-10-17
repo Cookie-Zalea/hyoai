@@ -118,6 +118,7 @@
         "tokens": "{count} tokens",
         "speed": "{value} tok/s",
         "scrollToBottom": "滚动到底部",
+        "generatedImage": "生成的图片",
         "aborted": "生成已停止",
         "chapterExtract": "第 {index}/{total} 章 · 摘录",
         "chapterAnalysis": "第 {index}/{total} 章 · 分析",
@@ -131,6 +132,7 @@
     },
     "composer": {
         "placeholder": "发送消息…",
+        "imagePrompt": "描述你想生成的图片…",
         "send": "发送",
         "stop": "停止生成",
         "attachMenu": "添加文件或系统消息",

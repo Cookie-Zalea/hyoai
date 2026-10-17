@@ -13,6 +13,7 @@ import {
 import { useStore } from "@/hooks/useStore";
 import { useChatInstance } from "@/lib/chat/context";
 import { effortLabelKey, resolveEffortLevel } from "@/lib/effort";
+import { isImageGenerationModel } from "@/lib/imageModels";
 import { settingsStore } from "@/lib/stores/settings";
 import type { ModelConfig } from "@/types/server";
 
@@ -24,8 +25,15 @@ import type { ModelConfig } from "@/types/server";
  * active effort. Renders nothing when the model exposes neither.
  *
  * @param entry - Active model entry, source of the thinking and effort capabilities
+ * @param upstream - Active upstream model id; image models hide this section
  */
-export function ReasoningSection({ entry }: { entry: ModelConfig | null }) {
+export function ReasoningSection({
+    entry,
+    upstream,
+}: {
+    entry: ModelConfig | null;
+    upstream?: string | null;
+}) {
     const t = useTranslations("header");
     const { isMobile } = useResponsiveMenuSurface();
     const instance = useChatInstance();
@@ -36,6 +44,8 @@ export function ReasoningSection({ entry }: { entry: ModelConfig | null }) {
         ? globalThinking
         : (modelSel.thinking ?? globalThinking);
     const effort = instance.controlsGlobalModel ? globalEffort : (modelSel.effort ?? globalEffort);
+
+    if (isImageGenerationModel(upstream)) return null;
 
     const showThinking = Boolean(entry?.supportsThinking);
     const effortLevels = entry?.effort?.levels ?? [];
