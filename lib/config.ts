@@ -102,9 +102,11 @@ function resolveCapabilities(
     overrides: { modalities?: ModalityFlags; supportsThinking?: boolean; runtimeProps?: boolean },
 ): { modalities?: ModalityFlags; supportsThinking: boolean; runtimeProps: boolean } {
     const runtimeProps = overrides.runtimeProps ?? type === "llama.cpp";
-    const modalities = runtimeProps
-        ? overrides.modalities
-        : { image: false, audio: false, ...overrides.modalities };
+    // Attachment kinds are enabled unless the entry explicitly disables them:
+    // OpenAI-compatible endpoints rarely advertise capabilities, and blocking a
+    // capable vision/audio model is worse than letting the server reject a
+    // request from a model that lacks the capability.
+    const modalities = { image: true, audio: true, ...overrides.modalities };
     const supportsThinking =
         overrides.supportsThinking ??
         (Boolean(thinking?.on || thinking?.off) || type === "rag-sse");
