@@ -434,6 +434,9 @@ types/          shared types (chat, server, settings, api, storage)
 
     ![The model menu as a mobile bottom drawer with reasoning levels and a thinking toggle](public/images/responsive.png)
 
+- Localized interface in French, English and Chinese, switchable from the header
+  and forceable in embeds with `lang=zh`
+
 - Accessible: icon-only controls carry `aria-label`s and decorative glyphs are
   `aria-hidden`; drawers and dialogs keep a title (visually hidden when not
   shown), and menu focus returns to its trigger or is handed off on dismiss —

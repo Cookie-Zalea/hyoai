@@ -1,6 +1,6 @@
 import { localStorageAdapter } from "@/lib/storage/local";
 import { createStore } from "@/lib/store";
-import { type Locale, LOCALES } from "@/types/settings";
+import { isLocale, type Locale, LOCALES } from "@/types/settings";
 import { STORAGE_KEYS } from "@/types/storage";
 
 // First declared locale, used as the fallback when nothing else matches.
@@ -20,7 +20,7 @@ export const localeStore = createStore<LocaleState>({ locale: FALLBACK_LOCALE })
  * @returns The matching locale id, or null if none matches
  */
 function asLocale(value: string | null | undefined): Locale | null {
-    return LOCALES.some((entry) => entry.id === value) ? (value as Locale) : null;
+    return isLocale(value) ? value : null;
 }
 
 /**
