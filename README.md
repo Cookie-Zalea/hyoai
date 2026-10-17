@@ -176,6 +176,9 @@ application loads a `config.json` file served next to it (in dev:
 rebuild). Each entry describes a model and the endpoint serving it. The in-app
 **Config** tab (Settings) edits the same fields as local overrides, stored in
 `localStorage` on top of the deployed file and revertable from the Reset dialog.
+The tab is fully graphical: models, endpoints, keys, attachment capabilities
+(dedicated image/audio switches) and integrations can be edited without writing
+JSON.
 
 ![The Config tab in Settings, editing a model entry](public/images/config.png)
 
@@ -202,7 +205,7 @@ Keys of a `models` entry:
 | `streaming`        | boolean                                        | `true`: token-by-token SSE; `false`: single JSON response (default: `true`)                                                                                                                                     |
 | `sendContext`      | boolean                                        | `true`: full branch history; `false`: last message only (default: `true`)                                                                                                                                       |
 | `disabled`         | boolean                                        | `true`: keep the entry in the file but hide it from the model selector (default: `false`)                                                                                                                       |
-| `modalities`       | `{ image?, audio? }`                           | Attachment capabilities; a `false` flag disables that attachment menu entry. Off by default unless the endpoint is probed (`runtimeProps`, e.g. llama.cpp `/props`); overridable                                |
+| `modalities`       | `{ image?, audio? }`                           | Attachment capabilities; on by default, a `false` flag disables that attachment menu entry. Explicit values override the runtime probe.                                                                         |
 | `supportsThinking` | boolean                                        | Whether the reasoning toggle is offered. Defaults from `type` and from the presence of a `thinking` config, overridable                                                                                         |
 | `runtimeProps`     | boolean                                        | Whether the endpoint exposes a llama.cpp-style `GET /props` (context size, modalities, model info). Defaults from `type`, overridable                                                                           |
 
@@ -213,8 +216,9 @@ as Anthropic's `anthropic-dangerous-direct-browser-access`.
 Only the active choice (entry and picked model) is remembered in localStorage;
 the file remains the source of truth for the list. Discovered lists refresh at
 startup and whenever the model selector opens, and `runtimeProps` endpoints are
-also probed through `GET /props` for their context size, modalities (image and
-audio attachments are gated on them) and the model information dialog.
+also probed through `GET /props` for their context size and the model information
+dialog. Image and audio attachments are enabled by default; set `modalities` to
+`false` on an entry to hide them.
 
 ## Reasoning: `thinking` and `effort`
 
