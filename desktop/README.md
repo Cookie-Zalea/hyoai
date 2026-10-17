@@ -1,4 +1,4 @@
-# HYOAI 桌面版
+# ZALEANAI 桌面版
 
 这个目录把纯静态的 Next.js 应用包成 Windows 单文件 exe 和安装程序，做法与
 `作业发布系统` 相同：**系统自带的 C# 编译器** + 内嵌网页资源 + 本地回环服务 +
@@ -14,8 +14,8 @@ npm run dist:win
 
 ```bash
 npm run build                 # 生成 out/ 静态导出
-node desktop/build-exe.mjs    # → dist/HYOAI.exe（便携版，单文件）
-node desktop/build-setup.mjs  # → dist/安装/HYOAI安装程序.exe
+node desktop/build-exe.mjs    # → dist/ZALEANAI.exe（便携版，单文件）
+node desktop/build-setup.mjs  # → dist/安装/ZALEANAI安装程序.exe
 ```
 
 只改桌面壳、不改网页时，可以跳过 `npm run build`，直接跑后两条命令。
@@ -28,20 +28,20 @@ node desktop/build-setup.mjs  # → dist/安装/HYOAI安装程序.exe
 
 ## 运行方式
 
-`HYOAI.exe` 做三件事：
+`ZALEANAI.exe` 做三件事：
 
 1. 把 `out/**` 内嵌资源挂到 `http://127.0.0.1:47821/`；
 2. 用 Edge（没有则 Chrome）的 `--app` 模式打开独立窗口；
-3. 托盘常驻，菜单里有「打开 HYOAI」「打开数据文件夹」「退出」。
+3. 托盘常驻，菜单里有「打开 ZALEANAI」「打开数据文件夹」「退出」。
 
-关闭窗口不会退出服务；要完全退出，右键任务栏右下角的 HYOAI 托盘图标 → 退出。
+关闭窗口不会退出服务；要完全退出，右键任务栏右下角的 ZALEANAI 托盘图标 → 退出。
 
 端口固定为 `47821`，这样每次启动的 origin 相同，localStorage 里的对话才不会
 因为端口变化而“消失”。如果端口被别的程序占用，启动器会提示。
 
 ## 数据位置
 
-所有对话相关的数据都在 **`D:\HYOAI\data`**：
+所有对话相关的数据都在 **`D:\ZALEANAI\data`**：
 
 | 路径               | 内容                                       |
 | ------------------ | ------------------------------------------ |
@@ -52,9 +52,9 @@ node desktop/build-setup.mjs  # → dist/安装/HYOAI安装程序.exe
 
 - 首次启动会创建目录、写入默认 `config.json`（Ollama `llama3.2-vision`）。
 - 没有 D 盘或 D 盘不可写时，自动退到
-  `%LOCALAPPDATA%\HYOAI\data`，并在 `launcher.log` 里写明。
+  `%LOCALAPPDATA%\ZALEANAI\data`，并在 `launcher.log` 里写明。
 - 备份：复制整个 `data` 文件夹；或在应用内 设置 → 数据 → 导出对话。
-- 安装程序默认装到 `D:\HYOAI\app`，**卸载不会删除数据目录**。
+- 安装程序默认装到 `D:\ZALEANAI\app`，**卸载不会删除数据目录**。
 
 ## 模型配置
 
@@ -85,13 +85,13 @@ set OLLAMA_ORIGINS=http://127.0.0.1:47821
 
 ## 安装程序
 
-`dist\安装\HYOAI安装程序.exe`：
+`dist\安装\ZALEANAI安装程序.exe`：
 
-- 默认安装到 `D:\HYOAI\app`，可改；不允许装到包含 `D:\HYOAI\data` 的目录；
-- 创建开始菜单「HYOAI」和「卸载 HYOAI」快捷方式，桌面快捷方式可选；
+- 默认安装到 `D:\ZALEANAI\app`，可改；不允许装到包含 `D:\ZALEANAI\data` 的目录；
+- 创建开始菜单「ZALEANAI」和「卸载 ZALEANAI」快捷方式，桌面快捷方式可选；
 - 写入当前用户的卸载登记（设置 → 应用里能看到）；
-- 静默安装：`HYOAI安装程序.exe /S`
-- 卸载：开始菜单里的「卸载 HYOAI」，或 `D:\HYOAI\app\HYOAI.exe --uninstall`
+- 静默安装：`ZALEANAI安装程序.exe /S`
+- 卸载：开始菜单里的「卸载 ZALEANAI」，或 `D:\ZALEANAI\app\ZALEANAI.exe --uninstall`
 
 ## 注意
 
@@ -100,4 +100,4 @@ set OLLAMA_ORIGINS=http://127.0.0.1:47821
 - 杀毒软件可能误报自解压/内嵌资源；可把安装目录加入信任。
 - 网页内容是构建时的快照；改了 `app/`、`components/` 等源码后要重新
   `npm run dist:win`。
-- 便携版 `HYOAI.exe` 和安装版共用 `D:\HYOAI\data`，可以互相替换。
+- 便携版 `ZALEANAI.exe` 和安装版共用 `D:\ZALEANAI\data`，可以互相替换。

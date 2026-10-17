@@ -1,6 +1,6 @@
 /**
- * Build the self-contained HYOAI launcher: embeds out/** as resources and
- * compiles desktop/launcher/HYOAI.cs with the system C# compiler.
+ * Build the self-contained ZALEANAI launcher: embeds out/** as resources and
+ * compiles desktop/launcher/ZALEANAI.cs with the system C# compiler.
  *
  * Run `npm run build` first (or use `npm run dist:win`, which does both).
  */
@@ -14,8 +14,8 @@ const run = promisify(execFile);
 const ROOT = resolve(fileURLToPath(new URL("../", import.meta.url)));
 const OUT_DIR = join(ROOT, "out");
 const DIST_DIR = join(ROOT, "dist");
-const EXE = join(DIST_DIR, "HYOAI.exe");
-const LAUNCHER = join(ROOT, "desktop", "launcher", "HYOAI.cs");
+const EXE = join(DIST_DIR, "ZALEANAI.exe");
+const LAUNCHER = join(ROOT, "desktop", "launcher", "ZALEANAI.cs");
 const ICON = join(ROOT, "desktop", "icon.ico");
 const RESPONSE_FILE = join(ROOT, "desktop", "build-exe.rsp");
 const CSC =
@@ -49,7 +49,7 @@ async function walk(dir) {
 
 for (const [path, hint] of [
     [CSC, "找不到 C# 编译器，用环境变量 CSC 指定 csc.exe 的完整路径"],
-    [LAUNCHER, "找不到 desktop/launcher/HYOAI.cs"],
+    [LAUNCHER, "找不到 desktop/launcher/ZALEANAI.cs"],
     [ICON, "找不到 desktop/icon.ico（由 app/icon.png 生成）"],
     [join(OUT_DIR, "index.html"), "找不到 out/index.html，先运行 npm run build"],
 ]) {

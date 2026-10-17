@@ -7,12 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace HyoaiSetup
+namespace ZaleanaiSetup
 {
     /**
-     * HYOAI installer: extracts the single-file launcher, registers uninstall
+     * ZALEANAI installer: extracts the single-file launcher, registers uninstall
      * information and creates shortcuts. The launcher itself owns the data
-     * directory (D:\HYOAI\data) and the --uninstall flow, so this setup does
+     * directory (D:\ZALEANAI\data) and the --uninstall flow, so this setup does
      * not need to copy a separate uninstaller.
      */
     internal static class Program
@@ -55,17 +55,17 @@ namespace HyoaiSetup
 
     internal static class Installer
     {
-        public const string AppName = "HYOAI";
-        public const string ExeName = "HYOAI.exe";
-        public const string DataDir = @"D:\HYOAI\data";
+        public const string AppName = "ZALEANAI";
+        public const string ExeName = "ZALEANAI.exe";
+        public const string DataDir = @"D:\ZALEANAI\data";
         public const string UninstallKey =
-            @"Software\Microsoft\Windows\CurrentVersion\Uninstall\HYOAI";
+            @"Software\Microsoft\Windows\CurrentVersion\Uninstall\ZALEANAI";
 
         private static byte[] payload;
         private static long payloadBytes;
 
         /**
-         * Default install location: D:\HYOAI\app so that uninstalling the app
+         * Default install location: D:\ZALEANAI\app so that uninstalling the app
          * never touches the sibling data folder. Falls back to the user's
          * local programs directory when the machine has no ready D: drive.
          */
@@ -74,7 +74,7 @@ namespace HyoaiSetup
             try
             {
                 DriveInfo drive = new DriveInfo("D");
-                if (drive.IsReady) return @"D:\HYOAI\app";
+                if (drive.IsReady) return @"D:\ZALEANAI\app";
             }
             catch { }
 
@@ -93,7 +93,7 @@ namespace HyoaiSetup
             if (IsInside(DataDir, dir))
                 throw new Exception(
                     "不能把程序装到数据目录或它的上级目录里：\r\n" + DataDir
-                    + "\r\n\r\n请换一个位置，例如 D:\\HYOAI\\app。");
+                    + "\r\n\r\n请换一个位置，例如 D:\\ZALEANAI\\app。");
 
             Log("开始安装到 " + dir + "，版本 " + BuildInfo.Version);
 
@@ -131,7 +131,7 @@ namespace HyoaiSetup
                     Log("自动启动失败：" + error.Message);
                     if (!silent)
                         MessageBox.Show(
-                            "安装完成，但没能自动启动。请双击桌面上的 HYOAI 打开。\r\n\r\n"
+                            "安装完成，但没能自动启动。请双击桌面上的 ZALEANAI 打开。\r\n\r\n"
                             + error.Message,
                             AppName,
                             MessageBoxButtons.OK,
@@ -148,7 +148,7 @@ namespace HyoaiSetup
                 .GetManifestResourceStream("payload/" + ExeName))
             {
                 if (stream == null)
-                    throw new Exception("安装包损坏：找不到内嵌的 HYOAI.exe。");
+                    throw new Exception("安装包损坏：找不到内嵌的 ZALEANAI.exe。");
 
                 payload = new byte[stream.Length];
                 int offset = 0;
@@ -165,17 +165,17 @@ namespace HyoaiSetup
 
         private static void KillRunning()
         {
-            foreach (Process process in Process.GetProcessesByName("HYOAI"))
+            foreach (Process process in Process.GetProcessesByName("ZALEANAI"))
             {
                 try
                 {
                     process.Kill();
                     process.WaitForExit(3000);
-                    Log("已关闭正在运行的 HYOAI（PID " + process.Id + "）");
+                    Log("已关闭正在运行的 ZALEANAI（PID " + process.Id + "）");
                 }
                 catch (Exception error)
                 {
-                    Log("关闭运行中的 HYOAI 失败：" + error.Message);
+                    Log("关闭运行中的 ZALEANAI 失败：" + error.Message);
                 }
             }
         }
@@ -279,7 +279,7 @@ namespace HyoaiSetup
 
         private static string LogPath()
         {
-            return Path.Combine(Path.GetTempPath(), "HYOAI-安装日志.txt");
+            return Path.Combine(Path.GetTempPath(), "ZALEANAI-安装日志.txt");
         }
 
         public static void Log(string message)
@@ -307,7 +307,7 @@ namespace HyoaiSetup
 
         public InstallForm()
         {
-            Text = "HYOAI 安装程序";
+            Text = "ZALEANAI 安装程序";
             ClientSize = new Size(560, 340);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             StartPosition = FormStartPosition.CenterScreen;
@@ -317,7 +317,7 @@ namespace HyoaiSetup
             try { Icon = LoadIcon(); } catch { }
 
             Label title = new Label();
-            title.Text = "HYOAI";
+            title.Text = "ZALEANAI";
             title.Font = new Font(Font.FontFamily, 18F, FontStyle.Bold);
             title.AutoSize = true;
             title.Location = new Point(24, 20);
@@ -357,7 +357,7 @@ namespace HyoaiSetup
             {
                 using (FolderBrowserDialog dialog = new FolderBrowserDialog())
                 {
-                    dialog.Description = "选择 HYOAI 的安装位置";
+                    dialog.Description = "选择 ZALEANAI 的安装位置";
                     dialog.SelectedPath = pathBox.Text;
                     if (dialog.ShowDialog(this) == DialogResult.OK)
                         pathBox.Text = dialog.SelectedPath;
@@ -373,16 +373,16 @@ namespace HyoaiSetup
             Controls.Add(desktopBox);
 
             launchBox = new CheckBox();
-            launchBox.Text = "安装完成后立即启动 HYOAI";
+            launchBox.Text = "安装完成后立即启动 ZALEANAI";
             launchBox.Checked = true;
             launchBox.AutoSize = true;
             launchBox.Location = new Point(104, 160);
             Controls.Add(launchBox);
 
             Label note = new Label();
-            note.Text = "对话与设置保存在 D:\\HYOAI\\data，卸载时不会删除。\r\n"
+            note.Text = "对话与设置保存在 D:\\ZALEANAI\\data，卸载时不会删除。\r\n"
                 + "如果电脑没有 D 盘，会自动改用当前用户目录。\r\n"
-                + "首次启动后可在 D:\\HYOAI\\data\\config.json 中配置模型端点。";
+                + "首次启动后可在 D:\\ZALEANAI\\data\\config.json 中配置模型端点。";
             note.AutoSize = true;
             note.ForeColor = Color.DimGray;
             note.Location = new Point(26, 198);
@@ -419,15 +419,15 @@ namespace HyoaiSetup
 
             try
             {
-                SetStatus("正在关闭已运行的 HYOAI…");
+                SetStatus("正在关闭已运行的 ZALEANAI…");
                 Installer.Install(dir, desktopBox.Checked, false, false);
                 SetStatus("安装完成");
                 MessageBox.Show(
-                    "HYOAI 安装完成。\r\n\r\n"
+                    "ZALEANAI 安装完成。\r\n\r\n"
                     + "程序位置：" + dir + "\r\n"
-                    + "数据目录：D:\\HYOAI\\data（首次启动时创建）\r\n\r\n"
-                    + "可以在 D:\\HYOAI\\data\\config.json 中配置模型端点。",
-                    "HYOAI",
+                    + "数据目录：D:\\ZALEANAI\\data（首次启动时创建）\r\n\r\n"
+                    + "可以在 D:\\ZALEANAI\\data\\config.json 中配置模型端点。",
+                    "ZALEANAI",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
@@ -445,7 +445,7 @@ namespace HyoaiSetup
                     {
                         MessageBox.Show(
                             "程序已安装，但没能自动启动：\r\n" + error.Message,
-                            "HYOAI",
+                            "ZALEANAI",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
                     }
@@ -457,7 +457,7 @@ namespace HyoaiSetup
                 SetStatus("安装失败");
                 MessageBox.Show(
                     error.Message,
-                    "HYOAI 安装失败",
+                    "ZALEANAI 安装失败",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 SetBusy(false);

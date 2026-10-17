@@ -1,6 +1,6 @@
 {
     "common": {
-        "appName": "HYOAI",
+        "appName": "ZALEANAI",
         "cancel": "取消",
         "save": "保存",
         "close": "关闭",
@@ -74,7 +74,7 @@
     "chat": {
         "emptyTitle": "与 {name} 模型对话",
         "emptyTitleDefaultName": "AI",
-        "emptyHint": "对话只保存在你的浏览器中。选择一个模型开始吧。",
+        "emptyHint": "选择一个模型开始吧。",
         "reasoning": "推理",
         "thinking": "思考",
         "search": "搜索",
@@ -361,7 +361,7 @@
             "exportDialogTitle": "导出对话",
             "exportDialogDescription": "选择要包含在下载文件中的对话。",
             "exportFormat": "格式",
-            "exportFormatNative": "HYOAI",
+            "exportFormatNative": "ZALEANAI",
             "exportFormatLlamaCpp": "llama.cpp 网页界面",
             "selectAll": "已选择 {count}/{total}",
             "exportSelected": "导出（{count}）",
