@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { type ComponentProps } from "react";
 
 import { Button } from "@/components/ui/button";
-import { resolveEffortLevel } from "@/lib/effort";
+import { effortLabelKey, resolveEffortLevel } from "@/lib/effort";
 import { cn } from "@/lib/utils";
 import type { ModelConfig } from "@/types/server";
 
@@ -16,10 +16,14 @@ import type { ModelConfig } from "@/types/server";
  * @param effort - Selected effort level id (empty follows the model default)
  */
 function EffortChip({ entry, effort }: { entry: ModelConfig | null; effort: string }) {
+    const t = useTranslations("header");
     const effortLevel = resolveEffortLevel(entry?.effort, effort);
     if (!effortLevel) return null;
+    const key = effortLabelKey(effortLevel);
 
-    return <span className="shrink-0 text-muted-foreground">{effortLevel.label}</span>;
+    return (
+        <span className="shrink-0 text-muted-foreground">{key ? t(key) : effortLevel.label}</span>
+    );
 }
 
 /**

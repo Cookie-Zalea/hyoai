@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { ChunkingControl } from "@/components/chat/composer/ChunkingControl";
+import { ComposerReasoningControl } from "@/components/chat/composer/ComposerReasoningControl";
 import { ComposerReply } from "@/components/chat/composer/ComposerReply";
 import { ComposerShell } from "@/components/chat/composer/ComposerShell";
 import { SystemMessageChip } from "@/components/chat/composer/SystemMessageChip";
@@ -82,6 +83,7 @@ export function Composer({ home = false }: { home?: boolean }) {
                 banner={chat.controlsGlobalModel ? <SystemMessageChip /> : undefined}
                 rightControls={
                     <>
+                        <ComposerReasoningControl />
                         <ChunkingControl />
                         {!modelLocked &&
                             (single ? (

@@ -65,6 +65,10 @@
         "thinking": "Thinking",
         "thinkingDescription": "Can think through more complex tasks",
         "effortDescription": "Higher effort means more thorough but slower answers",
+        "effortAuto": "Auto",
+        "effortLow": "Low",
+        "effortMedium": "Medium",
+        "effortHigh": "High",
         "default": "Default"
     },
     "chat": {
@@ -178,7 +182,8 @@
         "systemMessageDescription": "Sent at the top of this conversation, overriding the global system prompt setting.",
         "systemMessagePlaceholder": "You are a helpful assistant...",
         "enterHint": "Press <kbd>Enter</kbd> to send, <kbd>Shift + Enter</kbd> for new line",
-        "disabledNoModel": "No model available (config.json)"
+        "disabledNoModel": "No model available (config.json)",
+        "thinkingEffort": "Thinking effort"
     },
     "contextBar": {
         "context": "Context: {used}/{total} ({percent}%)",
