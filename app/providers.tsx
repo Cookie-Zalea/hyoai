@@ -15,8 +15,9 @@ import { openSettings, uiStore } from "@/lib/stores/ui";
 import { getEmbedConfig } from "@/lib/url";
 import en from "@/messages/en.json";
 import fr from "@/messages/fr.json";
+import zh from "@/messages/zh.json";
 
-const MESSAGES = { fr, en } as const;
+const MESSAGES = { fr, en, zh } as const;
 
 /**
  * Surfaces storage quota failures as a translated toast.

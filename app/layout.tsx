@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Sora } from "next/font/google";
 
 import { Providers } from "@/app/providers";
-import { DEFAULT_SETTINGS, SKIN_IDS } from "@/types/settings";
+import { DEFAULT_SETTINGS, LOCALES, SKIN_IDS } from "@/types/settings";
 import { STORAGE_KEYS } from "@/types/storage";
 
 import "./globals.css";
@@ -38,7 +38,10 @@ export const metadata: Metadata = {
  * the default skin. Outside embed mode the locale has no pre-paint visual impact
  * and is resolved at mount by hydrateLocale.
  */
-const bootScript = `(function(){try{var d=document.documentElement;var SK=${JSON.stringify(SKIN_IDS)};var DEF=${JSON.stringify(DEFAULT_SETTINGS.skin)};var q=new URLSearchParams(location.search);if(q.has("embed")){d.dataset.embed="1";var es=q.get("skin");d.dataset.skin=(SK.indexOf(es)>=0)?es:DEF;var el=q.get("lang");d.lang=(el==="fr"||el==="en")?el:(((navigator.language||"fr").slice(0,2)==="en")?"en":"fr");var et=q.get("theme");if(et==="dark"||et==="light"){d.classList.toggle("dark",et==="dark");}}else{var s=localStorage.getItem(${JSON.stringify(STORAGE_KEYS.skin)});d.dataset.skin=(SK.indexOf(s)>=0)?s:DEF;}}catch(e){document.documentElement.dataset.skin=${JSON.stringify(DEFAULT_SETTINGS.skin)};}})();`;
+const DEFAULT_LOCALE = LOCALES[0].id;
+const LOCALE_IDS = LOCALES.map((entry) => entry.id);
+
+const bootScript = `(function(){try{var d=document.documentElement;var SK=${JSON.stringify(SKIN_IDS)};var DEF=${JSON.stringify(DEFAULT_SETTINGS.skin)};var EL=${JSON.stringify(LOCALE_IDS)};var DL=${JSON.stringify(DEFAULT_LOCALE)};var q=new URLSearchParams(location.search);if(q.has("embed")){d.dataset.embed="1";var es=q.get("skin");d.dataset.skin=(SK.indexOf(es)>=0)?es:DEF;var el=q.get("lang");var bl=(navigator.language||DL).slice(0,2);d.lang=(EL.indexOf(el)>=0)?el:((EL.indexOf(bl)>=0)?bl:DL);var et=q.get("theme");if(et==="dark"||et==="light"){d.classList.toggle("dark",et==="dark");}}else{var s=localStorage.getItem(${JSON.stringify(STORAGE_KEYS.skin)});d.dataset.skin=(SK.indexOf(s)>=0)?s:DEF;var sl=localStorage.getItem(${JSON.stringify(STORAGE_KEYS.locale)});if(EL.indexOf(sl)>=0){d.lang=sl;}}}catch(e){document.documentElement.dataset.skin=${JSON.stringify(DEFAULT_SETTINGS.skin)};}})();`;
 
 /**
  * Root layout: fonts, pre-paint boot script and client providers.
@@ -52,7 +55,7 @@ export default function RootLayout({
 }>) {
     return (
         <html
-            lang="fr"
+            lang={DEFAULT_LOCALE}
             suppressHydrationWarning
             className={`${inter.variable} ${sora.variable} ${jetbrainsMono.variable} h-full antialiased`}
         >
