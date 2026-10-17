@@ -12,10 +12,10 @@ using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace HyoaiDesktop
+namespace ZaleanaiDesktop
 {
     /**
-     * HYOAI desktop launcher.
+     * ZALEANAI desktop launcher.
      *
      * The Next.js export is embedded as resources and served from a loopback
      * port, then opened as an Edge/Chrome app window with a dedicated profile.
@@ -27,20 +27,20 @@ namespace HyoaiDesktop
     {
         private const int Port = 47821;
         private const string Url = "http://127.0.0.1:47821/";
-        private const string Marker = "X-HYOAIDesktop";
+        private const string Marker = "X-ZALEANAIDesktop";
         private const string Prefix = "app/";
-        private const string AppName = "HYOAI";
-        private const string DataFolderName = "HYOAI";
-        private const string ExeName = "HYOAI.exe";
+        private const string AppName = "ZALEANAI";
+        private const string DataFolderName = "ZALEANAI";
+        private const string ExeName = "ZALEANAI.exe";
         private const string ConfigFileName = "config.json";
         private const string ReadmeFileName = "使用说明.txt";
         private const string UninstallKey =
-            @"Software\Microsoft\Windows\CurrentVersion\Uninstall\HYOAI";
+            @"Software\Microsoft\Windows\CurrentVersion\Uninstall\ZALEANAI";
 
         private const int Free = 0, Ours = 1, Foreign = 2;
 
         private const string DefaultConfig = @"{
-    ""appName"": ""HYOAI"",
+    ""appName"": ""ZALEANAI"",
     ""defaultModel"": ""ollama-vision"",
     ""models"": [
         {
@@ -65,7 +65,7 @@ namespace HyoaiDesktop
 ";
 
         private const string ReadmeText =
-            "HYOAI 数据目录\r\n"
+            "ZALEANAI 数据目录\r\n"
             + "================\r\n\r\n"
             + "config.json        模型端点配置。改完保存，在应用里刷新页面即可生效。\r\n"
             + "browser-profile/   对话、设置、登录状态等（浏览器本地存储）。\r\n"
@@ -105,7 +105,7 @@ namespace HyoaiDesktop
             }
             if (probe == Foreign)
             {
-                Warn("端口 " + Port + " 被其他程序占用了，HYOAI 无法启动本地服务。\r\n\r\n"
+                Warn("端口 " + Port + " 被其他程序占用了，ZALEANAI 无法启动本地服务。\r\n\r\n"
                     + "请关闭占用该端口的程序后再试。\r\n\r\n日志：" + LogPath());
                 return;
             }
@@ -547,7 +547,7 @@ namespace HyoaiDesktop
                         + " --user-data-dir=\"" + ProfileRoot + "\""
                         + " --no-first-run --no-default-browser-check"
                         + " --disable-features=Translate --lang=zh-CN";
-                    string debugPort = Environment.GetEnvironmentVariable("HYOAI_DEBUG_PORT");
+                    string debugPort = Environment.GetEnvironmentVariable("ZALEANAI_DEBUG_PORT");
                     if (!string.IsNullOrEmpty(debugPort))
                         info.Arguments += " --remote-debugging-port=" + debugPort;
                     info.UseShellExecute = false;
@@ -566,7 +566,7 @@ namespace HyoaiDesktop
                 Process.Start(new ProcessStartInfo(Url) { UseShellExecute = true });
                 Log("已用系统默认浏览器打开");
                 Warn("没有找到 Edge 或 Chrome，已用默认浏览器打开。\r\n\r\n"
-                    + "对话数据将保存在默认浏览器的配置里，而不是 D 盘的 HYOAI 数据目录。");
+                    + "对话数据将保存在默认浏览器的配置里，而不是 D 盘的 ZALEANAI 数据目录。");
             }
             catch (Exception error)
             {
@@ -586,7 +586,7 @@ namespace HyoaiDesktop
                 this.listeners = listeners;
 
                 ContextMenuStrip menu = new ContextMenuStrip();
-                menu.Items.Add("打开 HYOAI", null, delegate { OpenWindow(); });
+                menu.Items.Add("打开 ZALEANAI", null, delegate { OpenWindow(); });
                 menu.Items.Add("打开数据文件夹", null, delegate { OpenDataFolder(); });
                 menu.Items.Add(new ToolStripSeparator());
                 menu.Items.Add("退出", null, delegate { Quit(); });
@@ -603,7 +603,7 @@ namespace HyoaiDesktop
                 {
                     try { File.WriteAllText(tip, ""); } catch { }
                     icon.ShowBalloonTip(6000, AppName,
-                        "HYOAI 已在后台运行。\r\n数据目录：" + DataRoot
+                        "ZALEANAI 已在后台运行。\r\n数据目录：" + DataRoot
                         + "\r\n关闭窗口后可从任务栏右下角的托盘图标重新打开或退出。",
                         ToolTipIcon.Info);
                 }
@@ -668,7 +668,7 @@ namespace HyoaiDesktop
             if (installed == null || !SamePath(installed, installDir))
             {
                 if (!silent)
-                    Warn("没有找到 HYOAI 的安装信息。\r\n\r\n"
+                    Warn("没有找到 ZALEANAI 的安装信息。\r\n\r\n"
                         + "如果这是便携版，直接删除 exe 即可；数据文件夹请自行保留。");
                 return;
             }
@@ -676,15 +676,15 @@ namespace HyoaiDesktop
             if (!silent)
             {
                 DialogResult answer = MessageBox.Show(
-                    "确定要卸载 HYOAI 吗？\r\n\r\n"
+                    "确定要卸载 ZALEANAI 吗？\r\n\r\n"
                     + "对话与设置会保留在：\r\n" + DataRoot,
-                    "卸载 HYOAI",
+                    "卸载 ZALEANAI",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
                 if (answer != DialogResult.Yes) return;
             }
 
-            foreach (Process process in Process.GetProcessesByName("HYOAI"))
+            foreach (Process process in Process.GetProcessesByName("ZALEANAI"))
             {
                 if (process.Id == Process.GetCurrentProcess().Id) continue;
                 try
@@ -707,8 +707,8 @@ namespace HyoaiDesktop
             if (!silent)
             {
                 MessageBox.Show(
-                    "HYOAI 已卸载。\r\n\r\n对话与设置仍保留在：\r\n" + DataRoot,
-                    "卸载 HYOAI",
+                    "ZALEANAI 已卸载。\r\n\r\n对话与设置仍保留在：\r\n" + DataRoot,
+                    "卸载 ZALEANAI",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }

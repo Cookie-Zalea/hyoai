@@ -1,6 +1,6 @@
 {
     "common": {
-        "appName": "HYOAI",
+        "appName": "ZALEANAI",
         "cancel": "Cancel",
         "save": "Save",
         "close": "Close",
@@ -74,7 +74,7 @@
     "chat": {
         "emptyTitle": "Chat with {name} models",
         "emptyTitleDefaultName": "AI",
-        "emptyHint": "Your conversations stay in your browser. Pick a model to get started.",
+        "emptyHint": "Pick a model to get started.",
         "reasoning": "Reasoning",
         "thinking": "Thinking",
         "search": "Search",
@@ -361,7 +361,7 @@
             "exportDialogTitle": "Export conversations",
             "exportDialogDescription": "Choose the conversations to include in the downloaded file.",
             "exportFormat": "Format",
-            "exportFormatNative": "HYOAI",
+            "exportFormatNative": "ZALEANAI",
             "exportFormatLlamaCpp": "llama.cpp webui",
             "selectAll": "{count}/{total} selected",
             "exportSelected": "Export ({count})",

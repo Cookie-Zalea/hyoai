@@ -1,22 +1,22 @@
-# HYOAI
+# ZALEANAI
 
 > **Host Your Own AI** — a server-less, browser-only chat UI for any
 > OpenAI-compatible LLM.
 
-HYOAI is a 100% static front-end: no backend of its own, nothing to deploy or
+ZALEANAI is a 100% static front-end: no backend of its own, nothing to deploy or
 secure. The browser talks **directly** to your inference server's API
 (llama.cpp, vLLM, Ollama, or any OpenAI-compatible endpoint, including public
 ones). Conversations never leave the browser — they live in `localStorage`
 (compressed). Drop the build anywhere static files are served: an object store,
 a CDN, or right next to your inference server.
 
-> **HYOAI ships no model.** You bring your own LLM. The
+> **ZALEANAI ships no model.** You bring your own LLM. The
 > [Bring your own LLM](#bring-your-own-llm) section gets one running in a couple
 > of minutes.
 
 ## Why we built it
 
-HYOAI is built and open-sourced by **[Zenetys](https://www.zenetys.com)**, an IT
+ZALEANAI is built and open-sourced by **[Zenetys](https://www.zenetys.com)**, an IT
 services company specialized in the **observability** and **operational
 maintenance** of network and security infrastructures.
 
@@ -34,7 +34,7 @@ general-purpose, multi-backend client.
 
 ## Bring your own LLM
 
-HYOAI needs an LLM endpoint to talk to. You point it at a **local** server you
+ZALEANAI needs an LLM endpoint to talk to. You point it at a **local** server you
 run yourself, or at a **remote** API — or both, and switch between them from the
 model menu, where a reasoning level and thinking toggle also live when the model
 declares them (see [Reasoning](#reasoning-thinking-and-effort)).
@@ -111,7 +111,7 @@ lists the per-backend origin flags.
 
 ### Remote model
 
-Point HYOAI at a hosted API instead. Browsers can only call APIs that send CORS
+Point ZALEANAI at a hosted API instead. Browsers can only call APIs that send CORS
 headers. **[OpenRouter](https://openrouter.ai)** does, so it works directly from
 a static deployment:
 
@@ -345,7 +345,7 @@ then stay on the same origin and no CORS configuration is needed. A `./llm`
 
 ## Related projects
 
-HYOAI's niche is the **pure-client, static** end of the spectrum: no backend, no
+ZALEANAI's niche is the **pure-client, static** end of the spectrum: no backend, no
 container required, multi-backend, with reasoning controls and a compare mode.
 Other good projects, grouped by architecture:
 

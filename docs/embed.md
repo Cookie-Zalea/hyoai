@@ -1,6 +1,6 @@
-# Embedding HYOAI
+# Embedding ZALEANAI
 
-HYOAI ships an embeddable widget. The same static build, loaded in an iframe
+ZALEANAI ships an embeddable widget. The same static build, loaded in an iframe
 with `?embed=1`, renders a compact chat surface instead of the full
 application: there is no second bundle to deploy and still no server side. A
 host page points an iframe at the deployed app, configures the look and the

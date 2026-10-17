@@ -24,9 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "HYOAI - Host Your Own AI",
+    title: "ZALEANAI - Host Your Own AI",
     description:
-        "HYOAI: a server-less, browser-only chat client for llama.cpp, vLLM, Ollama and OpenAI-compatible LLMs.",
+        "ZALEANAI: a server-less, browser-only chat client for llama.cpp, vLLM, Ollama and OpenAI-compatible LLMs.",
 };
 
 /**

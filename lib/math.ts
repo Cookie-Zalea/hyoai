@@ -1,5 +1,5 @@
 // Placeholder prefix used while protecting code spans and existing math.
-const PLACEHOLDER = "\u0000HYOAI_MATH_";
+const PLACEHOLDER = "\u0000ZALEANAI_MATH_";
 
 /**
  * Rewrite the LaTeX bracket/paren delimiters models commonly emit into the
