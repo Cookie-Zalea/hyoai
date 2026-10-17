@@ -417,6 +417,10 @@ types/          shared types (chat, server, settings, api, storage)
 
     ![Attachment menu: images, audio, text files, PDFs and a system message](public/images/attachements.png)
 
+- Camera and drawing board: capture a photo from the device camera or write a
+  formula on a canvas; both land in the composer as regular image attachments
+  (subject to the same vision-model gate)
+
 - Sampling and penalty settings: an empty field is not sent (the endpoint
   applies its own defaults); parameter names are adapted to the endpoint `type`
   (`repetition_penalty` for vLLM, `repeat_penalty` and `dry_*` for llama.cpp)
