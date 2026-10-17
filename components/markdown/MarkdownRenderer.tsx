@@ -1,14 +1,27 @@
 "use client";
 
-import { memo } from "react";
-import ReactMarkdown from "react-markdown";
+import { memo, useMemo } from "react";
+import ReactMarkdown, { type Options } from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 
 import { CodeBlock } from "@/components/markdown/CodeBlock";
+import { normalizeMathDelimiters } from "@/lib/math";
 
-const REMARK_PLUGINS = [remarkGfm];
-const REHYPE_PLUGINS = [rehypeHighlight];
+const REMARK_PLUGINS = [remarkGfm, remarkMath];
+const REHYPE_PLUGINS: NonNullable<Options["rehypePlugins"]> = [
+    rehypeHighlight,
+    [
+        rehypeKatex,
+        {
+            throwOnError: false,
+            strict: "ignore",
+            trust: false,
+        },
+    ],
+];
 
 const COMPONENTS = {
     pre: CodeBlock,
@@ -24,6 +37,8 @@ const COMPONENTS = {
  * @param content - Markdown source
  */
 export const MarkdownRenderer = memo(function MarkdownRenderer({ content }: { content: string }) {
+    const normalized = useMemo(() => normalizeMathDelimiters(content), [content]);
+
     return (
         <div className="chat-markdown">
             <ReactMarkdown
@@ -31,7 +46,7 @@ export const MarkdownRenderer = memo(function MarkdownRenderer({ content }: { co
                 rehypePlugins={REHYPE_PLUGINS}
                 components={COMPONENTS}
             >
-                {content}
+                {normalized}
             </ReactMarkdown>
         </div>
     );
