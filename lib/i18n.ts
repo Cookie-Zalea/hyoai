@@ -3,8 +3,9 @@ import { createTranslator } from "next-intl";
 import { localeStore } from "@/lib/stores/locale";
 import en from "@/messages/en.json";
 import fr from "@/messages/fr.json";
+import zh from "@/messages/zh.json";
 
-const MESSAGES = { fr, en } as const;
+const MESSAGES = { fr, en, zh } as const;
 
 /**
  * Build a translator for non-React modules (classes, pure functions) that cannot

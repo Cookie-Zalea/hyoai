@@ -47,7 +47,7 @@ working widget. Booleans accept `1`/`true` and `0`/`false`.
 | `embed`       | `1`, `true`, empty, or any other value              | —        | Enables embed mode. Any other non-empty value is kept as a widget id, reserved for future per-widget memory |
 | `theme`       | `light`, `dark`, `system`                           | `system` | Forces the colour theme                                                                                     |
 | `skin`        | `flat`, `soft`, `contrast`, `warm`, `forest`, `dim` | `soft`   | Forces the UI skin                                                                                          |
-| `lang`        | `fr`, `en`                                          | `fr`     | Forces the UI locale, which unlike the full app does not follow the browser                                 |
+| `lang`        | `fr`, `en`, `zh`                                    | `fr`     | Forces the UI locale, which unlike the full app does not follow the browser                                 |
 | `model`       | a `models` entry id from `config.json`              | —        | Preselects that entry; ignored when no entry carries the id                                                 |
 | `upstream`    | upstream model id                                   | —        | Upstream model to use within the preselected entry                                                          |
 | `lock`        | boolean                                             | `0`      | Hides the model selector. A display hint, not a security boundary                                           |

@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AttachmentMenu } from "@/components/chat/composer/AttachmentMenu";
 import { ComposerAttachments } from "@/components/chat/composer/ComposerAttachments";
+import { ComposerImageTools } from "@/components/chat/composer/ComposerImageTools";
 import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -297,6 +298,11 @@ export function ComposerShell({
                     )}
                 >
                     {attachmentMenu}
+                    <ComposerImageTools
+                        blocked={visionBlocked}
+                        onImages={att.addImageFiles}
+                        onAdded={focusInput}
+                    />
                     {textareaEl}
                     <div
                         className={cn(

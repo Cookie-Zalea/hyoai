@@ -417,6 +417,10 @@ types/          shared types (chat, server, settings, api, storage)
 
     ![Attachment menu: images, audio, text files, PDFs and a system message](public/images/attachements.png)
 
+- Camera and drawing board: capture a photo from the device camera or write a
+  formula on a canvas; both land in the composer as regular image attachments
+  (subject to the same vision-model gate)
+
 - Sampling and penalty settings: an empty field is not sent (the endpoint
   applies its own defaults); parameter names are adapted to the endpoint `type`
   (`repetition_penalty` for vLLM, `repeat_penalty` and `dry_*` for llama.cpp)
@@ -429,6 +433,9 @@ types/          shared types (chat, server, settings, api, storage)
   hydrates cleanly
 
     ![The model menu as a mobile bottom drawer with reasoning levels and a thinking toggle](public/images/responsive.png)
+
+- Localized interface in French, English and Chinese, switchable from the header
+  and forceable in embeds with `lang=zh`
 
 - Accessible: icon-only controls carry `aria-label`s and decorative glyphs are
   `aria-hidden`; drawers and dialogs keep a title (visually hidden when not
